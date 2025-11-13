@@ -2,27 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 Route::get('/', [\App\Http\Controllers\LoginController::class, 'index']);
 Route::get('login', [\App\Http\Controllers\LoginController::class, 'index'])->name('login');
 Route::post('action-login', [\App\Http\Controllers\LoginController::class, 'actionLogin'])->name('action-login');
 Route::get('sign-out', [\App\Http\Controllers\LoginController::class, 'logout'])->name('sign-out');
 
+
 Route::prefix('admin')->group(function(){
     Route::resource('dashboard', \App\Http\Controllers\ADMIN\DashboardController::class);
+    Route::resource('user', \App\Http\Controllers\ADMIN\UserController::class);
+    Route::resource('blog', \App\Http\Controllers\ADMIN\BlogController::class);
 });
-// get,post,put,delete
 
-//root get : melihat, membaca
+// route get : melihat, membaca
 Route::get('belajar', [\App\Http\Controllers\BelajarController::class, 'index']);
 Route::get('aritmatika', [\App\Http\Controllers\BelajarController::class, 'create']);
 Route::get('aritmatika/tambah', [\App\Http\Controllers\BelajarController::class, 'tambah']);
